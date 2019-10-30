@@ -1,0 +1,137 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Video.js BIF</title>
+  <meta name="description" content="Video.js plugin for supporting BIF.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link href="node_modules/video.js/dist/video-js.css" rel="stylesheet">
+
+  <style>
+
+.video-has-bif .bif-thumbnail {
+    display: none;
+    border-radius: 5px;
+    overflow: hidden;
+    background: #888; 
+    bottom: 45px;
+    position: absolute;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 20em;
+    margin-left: 0em;
+    text-align: center;
+}
+
+.video-has-bif .bif-thumbnail .bif-time {
+    position: relative;
+    width: 100%;
+    display: block;
+    background: #323b52;
+    text-align: center;
+    padding: 3px;
+    font-size: 12px;
+}
+
+.video-has-bif .bif img{
+    width: 100%;
+    height: auto;
+}
+
+.video-has-bif .vjs-time-tooltip {
+    display: none !important;
+}
+
+  </style>
+</head>
+
+<body>
+  <video id="player" class="video-js vjs-16-9 vjs-default-skin" muted width="600" height="250" controls>
+    <source src="asset/joe.mp4" type="video/mp4" />
+
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+  </video>
+
+  <p>
+    <label>
+      File: <input id="file" type="file" />
+    </label>
+  </p>
+
+  <p>
+    <label>
+      Frame Number: <input id="frame_number" min="0" type="number" />
+    </label>
+  </p>
+
+  <p>
+    <img id="frame" />
+  </p>
+
+  <script src="node_modules/video.js/dist/video.js"></script>
+  <script src="dist/videojs.bif.js"></script>
+
+  <script>
+    const file = document.getElementById('file');
+    const frame = document.getElementById('frame');
+    const frameNumber = document.getElementById('frame_number');
+
+    file.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.addEventListener('load', (event) => {
+        videojs('player').ready(function () {
+          this.bif({
+            data: event.target.response,
+          });
+        });
+      });
+
+      reader.readAsArrayBuffer(file);
+    });
+
+    frameNumber.addEventListener('change', (event) => {
+      const { BIFMouseTimeDisplay } = videojs('player').controlBar.progressControl.seekBar;
+
+      if (!BIFMouseTimeDisplay.hasImages()) {
+        return;
+      }
+
+      const time = event.target.value;
+
+      frame.src = BIFMouseTimeDisplay.BIFParser.getImageDataAtSecond(time);
+    });
+
+    // initialize the plugin
+    videojs('player',{
+      controlBar: {
+          volumePanel: {
+              inline: false
+          }
+      }
+    }).ready(function () {
+
+      
+      this.bif({
+        src: 'asset/joe.bif',
+      });
+    });
+  </script>
+</body>
+
+</html>
