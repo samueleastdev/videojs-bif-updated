@@ -21,12 +21,12 @@
     "videojs",
     "videojs-plugin"
   ],
-  "author": "Carey Hinoki <carey.hinoki@gmail.com> (http://www.careyhinoki.me/)",
+  "author": "Samuel East",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chemoish/videojs-bif/issues"
+    "url": "https://github.com/samueleastdev/videojs-bif-updated/issues"
   },
-  "homepage": "https://github.com/chemoish/videojs-bif#readme",
+  "homepage": "https://github.com/samueleastdev/videojs-bif-updated#readme",
   "dependencies": {
     "jdataview": "^2.5.0",
     "lodash": "^4.16.1",
