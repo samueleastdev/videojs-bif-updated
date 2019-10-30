@@ -52,86 +52,35 @@
 </head>
 
 <body>
-  <video id="player" class="video-js vjs-16-9 vjs-default-skin" muted width="600" height="250" controls>
-    <source src="asset/joe.mp4" type="video/mp4" />
 
-    <p class="vjs-no-js">
-      To view this video please enable JavaScript, and consider upgrading to a web browser that
-      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-    </p>
-  </video>
+    <video id="player" class="video-js vjs-16-9 vjs-default-skin" muted width="600" height="250" controls>
+        <source src="https://player.vimeo.com/external/364506443.m3u8?s=1d082204ed7796dc08118323bdda6c94f6ed1e02" type="application/x-mpegURL" />
+        <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser that
+            <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+        </p>
+    </video>
 
-  <p>
-    <label>
-      File: <input id="file" type="file" />
-    </label>
-  </p>
+    <script src="node_modules/video.js/dist/video.js"></script>
+    <script src="dist/videojs.bif.js"></script>
 
-  <p>
-    <label>
-      Frame Number: <input id="frame_number" min="0" type="number" />
-    </label>
-  </p>
-
-  <p>
-    <img id="frame" />
-  </p>
-
-  <script src="node_modules/video.js/dist/video.js"></script>
-  <script src="dist/videojs.bif.js"></script>
-
-  <script>
-    const file = document.getElementById('file');
-    const frame = document.getElementById('frame');
-    const frameNumber = document.getElementById('frame_number');
-
-    file.addEventListener('change', (event) => {
-      const file = event.target.files[0];
-
-      if (!file) {
-        return;
-      }
-
-      const reader = new FileReader();
-
-      reader.addEventListener('load', (event) => {
-        videojs('player').ready(function () {
-          this.bif({
-            data: event.target.response,
-          });
-        });
-      });
-
-      reader.readAsArrayBuffer(file);
-    });
-
-    frameNumber.addEventListener('change', (event) => {
-      const { BIFMouseTimeDisplay } = videojs('player').controlBar.progressControl.seekBar;
-
-      if (!BIFMouseTimeDisplay.hasImages()) {
-        return;
-      }
-
-      const time = event.target.value;
-
-      frame.src = BIFMouseTimeDisplay.BIFParser.getImageDataAtSecond(time);
-    });
-
+    <script>
+    
     // initialize the plugin
     videojs('player',{
-      controlBar: {
+        controlBar: {
           volumePanel: {
               inline: false
           }
-      }
+        }
     }).ready(function () {
 
-      
-      this.bif({
-        src: 'asset/joe.bif',
-      });
-    });
-  </script>
-</body>
+        this.bif({
+            src: "https://s3b-assets-bucket.s3.amazonaws.com/maleficent.bif",
+        });
 
+    });
+
+    </script>
+</body>
 </html>
