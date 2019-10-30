@@ -170,7 +170,7 @@ export default class BIFMouseTimeDisplay extends VjsMouseTimeDisplay {
 
     if (image) {
         
-        this.BIFImage.src = image;
+        this.BIFImage.src = image; 
 
     }
 
