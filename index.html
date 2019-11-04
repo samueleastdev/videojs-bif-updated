@@ -19,7 +19,7 @@
       display: none;
       border-radius: 5px;
       overflow: hidden;
-      background: #888; 
+      background: #000; 
       bottom: 45px;
       position: absolute;
       -webkit-transform: translateX(-50%);
@@ -35,13 +35,16 @@
       display: block;
       background: #323b52;
       text-align: center;
-      padding: 3px;
-      font-size: 12px;
+      padding: 7px;
+      font-size: 14px;
   }
 
   .video-has-bif .bif img{
       width: 100%;
       height: auto;
+      padding: 0;
+      margin: -2px;
+      border: none;
   }
 
   .video-has-bif .vjs-time-tooltip {
@@ -58,7 +61,7 @@
 <body>
 
     <video id="player" class="video-js vjs-16-9 vjs-default-skin" muted width="600" height="250" controls>
-        <source src="https://player.vimeo.com/external/364506443.m3u8?s=1d082204ed7796dc08118323bdda6c94f6ed1e02" type="application/x-mpegURL" />
+        <source src="https://d25hd5yfabpc2n.cloudfront.net/c44853a9-e88e-4f44-ae58-e94d568d58b8/master.m3u8" type="application/x-mpegURL" />
         <p class="vjs-no-js">
             To view this video please enable JavaScript, and consider upgrading to a web browser that
             <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
@@ -80,7 +83,7 @@
     }).ready(function () {
 
         this.bif({
-            src: "https://s3b-assets-bucket.s3.amazonaws.com/maleficent.bif",
+            src: "https://d25hd5yfabpc2n.cloudfront.net/c44853a9-e88e-4f44-ae58-e94d568d58b8/arctic-dogs-featurette-1_h1080p.bif",
         });
 
     });

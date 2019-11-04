@@ -168,7 +168,8 @@ export default class BIFMouseTimeDisplay extends VjsMouseTimeDisplay {
     this.BIFElement.style.display = 'block';
     this.BIFElement.style.left    = (event.offsetX + parent) + 'px';
 
-    if (image) {
+    // HACK!! Should find a better way to do this 
+    if (image && image.length > 23) {
         
         this.BIFImage.src = image; 
 
